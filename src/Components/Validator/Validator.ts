@@ -5,8 +5,6 @@ export type validationType = {
 };
 
 const validator = (value: string, validation: validationType[]): boolean => {
-  console.log("Value:", value);
-  console.log("Validation:", validation);
   for (const validator of validation) {
     if (validator.value === "MAX") {
       if (

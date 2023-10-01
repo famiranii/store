@@ -1,12 +1,14 @@
 import { useReducer } from "react";
 import validator, { validationType } from "../Validator/Validator";
 import "./Input.css";
+import { GetInputInfoType } from "./GetInputInfoType";
 
 type InputType = {
   type: string;
   placeholder: string;
   id: string;
   validation: validationType[];
+  getInputInfo: GetInputInfoType;
 };
 type state = {
   value: string;
@@ -33,13 +35,12 @@ const inputReducer = (state: state, action: action) => {
 };
 
 export default function Input(props: InputType) {
-  // const { age } = { name: "ali", age: 11 };
-  // console.log(age);
 
   const [mainInput, dispatch] = useReducer(inputReducer, {
     value: "",
     isvalid: false,
   });
+
   const onchangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: "CHANGE",
@@ -47,6 +48,7 @@ export default function Input(props: InputType) {
       validation: props.validation,
       isvalid: true,
     });
+    props.getInputInfo(props.id, mainInput.value, mainInput.isvalid);
   };
   return (
     <>
