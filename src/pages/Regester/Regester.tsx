@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
 import FirstBtn from "../../Components/Btns/FirstBtn";
 import Input from "../../Components/Input/Input";
+import { useNavigate } from "react-router-dom";
 import {
   minValidator,
   maxValidator,
@@ -9,10 +9,7 @@ import {
 import { useForm } from "../../hooks/useForm";
 
 function Regester() {
-  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
-  const [disable, setDisable] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   const [formState, getInputInfo] = useForm(
     {
@@ -20,17 +17,33 @@ function Regester() {
       email: { value: "", isValid: false },
       number: { value: "", isValid: false },
       password: { value: "", isValid: false },
-      repetedpassword: { value: "", isValid: false },
+      repetedPassword: { value: "", isValid: false },
     },
     false
   );
-  useEffect(() => {
-    if (formState.isFormValid) {
-      setDisable(false);
-    } else {
-      setDisable(true);
-    }
-  }, [formState.isFormValid]);
+  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const regesterData = {
+      name: formState.inputValue.name.value,
+      email: formState.inputValue.email.value,
+      number: formState.inputValue.number.value,
+      password: formState.inputValue.password.value,
+      password_repeat: formState.inputValue.repetedPassword.value,
+    };
+    fetch("https://api.storerestapi.com/auth/register", {
+      method: "POST",
+      body: JSON.stringify(regesterData),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        localStorage.setItem("username", formState.inputValue.name.value);
+        navigate('/')
+      });
+  };
 
   return (
     <section className="h-screen w-full flex justify-center items-center direct">
@@ -70,11 +83,11 @@ function Regester() {
         <Input
           type="password"
           placeholder="repeat password"
-          id="repetedpassword"
+          id="repetedPassword"
           validation={[minValidator(8)]}
           getInputInfo={getInputInfo}
         />
-        <FirstBtn disable={disable} />
+        <FirstBtn type={"submit"} disable={!formState.isFormValid} />
       </form>
     </section>
   );

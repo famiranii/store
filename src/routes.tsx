@@ -1,6 +1,6 @@
 import Cart from "./pages/Cart/Cart";
 import AdminPanel from "./pages/AdminPanel/AdminPanel";
-import Product from "./pages/Product/Product";
+import Product from "./pages/Products/Products";
 import Regester from "./pages/Regester/Regester";
 
 const routes = [

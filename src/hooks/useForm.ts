@@ -10,8 +10,11 @@ interface initiateValueType {
 
   name: initiateInnerValueType;
   email: initiateInnerValueType;
+  number: initiateInnerValueType;
+  password: initiateInnerValueType;
+  repetedPassword: initiateInnerValueType;
 }
- interface stateType {
+interface stateType {
   inputValue: initiateValueType;
   isFormValid: boolean;
 }
@@ -23,7 +26,7 @@ interface actionType {
   isValid: boolean;
 }
 
-const formReducer = (state:stateType, action: actionType) => {
+const formReducer = (state: stateType, action: actionType) => {
   switch (action.type) {
     case "CHANGE": {
       let isFormValid = true;
@@ -32,7 +35,6 @@ const formReducer = (state:stateType, action: actionType) => {
           isFormValid = isFormValid && action.isValid;
         } else {
           isFormValid = isFormValid && state.inputValue[inputId].isValid;
-          console.log(state.inputValue);
         }
       }
       return {
@@ -55,7 +57,8 @@ const formReducer = (state:stateType, action: actionType) => {
 export const useForm = (
   inputValue: initiateValueType,
   isFormValid: boolean
-): [stateType, GetInputInfoType] => { ///////importent
+): [stateType, GetInputInfoType] => {
+  ///////importent
   const [formState, dispatch] = useReducer(formReducer, {
     inputValue,
     isFormValid,
