@@ -18,12 +18,14 @@ function Header() {
           </Link>
         )}
       </div>
-      <div className="relative">
-        <div className="absolute right-3 bottom-3 text-xs h-5 w-5 text-center text-slate-50 rounded-full bg-red-800">
-          {context.userCart.length}
-        </div>
-        <AiOutlineShoppingCart />
-      </div>
+      <button className="relative">
+        <Link to="/cart">
+          <div className="absolute right-3 bottom-3 text-xs h-5 w-5 text-center text-slate-50 rounded-full bg-red-800">
+            {context.userCart.length}
+          </div>
+          <AiOutlineShoppingCart />
+        </Link>
+      </button>
     </div>
   );
 }
