@@ -4,6 +4,7 @@ import { ProductType } from "../pages/Products/Product.type";
 interface CartContextType {
   allProduct: ProductType[];
   addToCart: (title: string) => void;
+  userCart:ProductType[]
 }
 type CartContexProviderProps = {
   children: React.ReactNode;
@@ -40,11 +41,10 @@ function CartContextProvider({ children }: CartContexProviderProps) {
     const isInShop = allProduct.find((product) => product.title === name);
     if (!isInCart && isInShop) {
       setUserCart([...userCart, { ...isInShop, cartCount: 1 }]);
-      console.log("add new   ", userCart);
     }
   };
   return (
-    <CartContext.Provider value={{ allProduct, addToCart }}>
+    <CartContext.Provider value={{ allProduct, addToCart ,userCart}}>
       {children}
     </CartContext.Provider>
   );
