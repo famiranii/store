@@ -11,18 +11,18 @@ function Header() {
     localStorage.clear()
   }
   return (
-    <div className="header w-full flex justify-between h-28 items-center px-10 text-2xl">
-      <div className="flex space-x-10 items-center">
+    <div className="header w-full sm:flex justify-between h-full pb-5 items-center px-10 text-2xl">
+      <div className="flex justify-between sm:space-x-10 items-center">
         <img height={100} width={100} src={logo} alt="logo" />
-        {localStorage.getItem("username") ? (
-          <h2 className=" font-mono">{localStorage.getItem("username")}</h2>
+        {localStorage.getItem("storeUsername") ? (
+          <h2 className=" font-mono ">{localStorage.getItem("storeUsername")}</h2>
         ) : (
           <Link to="/regester">
             <LoginLogutBtn text="log in" />
           </Link>
         )}
       </div>
-      <div className="flex items-center">
+      <div className="flex justify-between items-center">
                 <button className="relative">
           <Link to="/cart">
             <div className="absolute right-3 bottom-3 text-xs h-5 w-5 text-center text-slate-50 rounded-full bg-red-800">
@@ -31,7 +31,7 @@ function Header() {
             <AiOutlineShoppingCart />
           </Link>
         </button>
-        {localStorage.getItem("username") && (
+        {localStorage.getItem("storeUsername") && (
           <Link to="/login" className="me-3" onClick={clearLocalStorage}>
             <LoginLogutBtn text="log out" />
           </Link>

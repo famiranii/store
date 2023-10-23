@@ -18,7 +18,7 @@ function SingleProduct(props: SingleProductProps) {
   };
   return (
     <div className="m-5 mt-10 shadow p-5 text-sm text-stone-700">
-      <img src={img} alt="product img" width={200} height={200} />
+      <img src={img} alt="there isn't any image in this fake api that i used...." width={200} height={200} />
       <div className="space-y-1 h-24">
         <h2 className="font-bold">{title}</h2>
         <h2>category: {category}</h2>

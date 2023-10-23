@@ -41,10 +41,13 @@ function Regester() {
       .then((json) => {
         console.log(json);
         if (json.status === 201) {
-          localStorage.setItem("username", formState.inputValue.name.value);
+          localStorage.setItem(
+            "storeUsername",
+            formState.inputValue.name.value
+          );
           navigate("/");
         } else {
-          alert(json.message+'.  try it with .com');
+          alert(json.message + ".  try it with .com");
         }
       });
   };
