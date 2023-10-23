@@ -7,7 +7,7 @@ interface SingleProductProps {
 }
 
 function SingleProduct(props: SingleProductProps) {
-  const { title, price, category, createdBy } = props.product;
+  const { title, price, category, createdBy,img } = props.product;
   const context = useContext(CartContext);
   const productIncart = context.userCart.filter(
     (product) => product.title === title
@@ -18,7 +18,7 @@ function SingleProduct(props: SingleProductProps) {
   };
   return (
     <div className="m-5 mt-10 shadow p-5 text-sm text-stone-700">
-      <img src="/" alt="product img" width={200} height={200} />
+      <img src={img} alt="product img" width={200} height={200} />
       <div className="space-y-1 h-24">
         <h2 className="font-bold">{title}</h2>
         <h2>category: {category}</h2>

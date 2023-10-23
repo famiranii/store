@@ -1,80 +1,60 @@
-import FirstBtn from "../../Components/Btns/FirstBtn";
 import Input from "../../Components/Input/Input";
-import { useNavigate, Link } from "react-router-dom";
 import {
   minValidator,
   maxValidator,
   emailValidator,
 } from "../../Components/Validator/Rules";
 import { useForm } from "../../hooks/useForm";
+import { Link, useNavigate } from "react-router-dom";
+import FirstBtn from "../../Components/Btns/FirstBtn";
 
-function Regester() {
+export default function Login() {
   const navigate = useNavigate();
 
   const [formState, getInputInfo] = useForm(
     {
-      name: { value: "", isValid: false },
       email: { value: "", isValid: false },
-      number: { value: "", isValid: false },
       password: { value: "", isValid: false },
-      repetedPassword: { value: "", isValid: false },
     },
     false
   );
   const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const regesterData = {
-      name: formState.inputValue.name.value,
+    const loginData = {
       email: formState.inputValue.email.value,
-      number: formState.inputValue.number.value,
       password: formState.inputValue.password.value,
-      password_repeat: formState.inputValue.repetedPassword.value,
     };
-    fetch("https://api.storerestapi.com/auth/register", {
+    fetch("https://api.storerestapi.com/auth/login", {
       method: "POST",
-      body: JSON.stringify(regesterData),
+      body: JSON.stringify(loginData),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
     })
       .then((response) => response.json())
       .then((json) => {
+
         console.log(json);
         if (json.status === 201) {
-          localStorage.setItem("username", formState.inputValue.name.value);
           navigate("/");
         } else {
-          alert(json.message+'.  try it with .com');
+          alert(json.message);
         }
-      });
+      })
+      .catch((m) => console.log(m));
   };
-
   return (
-    <section className="h-screen w-full flex justify-center items-center direct">
+    <div className="flex items-center justify-center h-screen">
       <form
         className="p-10 shadow-md rounded-sm w-1/3"
         action="submit"
         onSubmit={submitForm}
       >
         <Input
-          type="text"
-          placeholder="name"
-          id="name"
-          validation={[minValidator(6), maxValidator(25)]}
-          getInputInfo={getInputInfo}
-        />
-        <Input
           type="email"
           placeholder="email"
           id="email"
           validation={[minValidator(4), maxValidator(40), emailValidator()]}
-          getInputInfo={getInputInfo}
-        />
-        <Input
-          type="number"
-          placeholder="number"
-          id="number"
-          validation={[minValidator(2)]}
           getInputInfo={getInputInfo}
         />
         <Input
@@ -84,20 +64,12 @@ function Regester() {
           validation={[minValidator(8)]}
           getInputInfo={getInputInfo}
         />
-        <Input
-          type="password"
-          placeholder="repeat password"
-          id="repetedPassword"
-          validation={[minValidator(8)]}
-          getInputInfo={getInputInfo}
-        />
+
         <FirstBtn type={"submit"} disable={!formState.isFormValid} />
         <div className="mt-3 text-blue-500 ">
-          <Link to="/login">login page</Link>
+          <Link to="/regester">regester page</Link>
         </div>
       </form>
-    </section>
+    </div>
   );
 }
-
-export default Regester;

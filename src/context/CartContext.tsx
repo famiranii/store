@@ -4,7 +4,7 @@ import { ProductType } from "../pages/Products/Product.type";
 interface CartContextType {
   allProduct: ProductType[];
   addToCart: (title: string) => void;
-  userCart:ProductType[]
+  userCart: ProductType[];
 }
 type CartContexProviderProps = {
   children: React.ReactNode;
@@ -24,6 +24,7 @@ function CartContextProvider({ children }: CartContexProviderProps) {
           price: product.price,
           category: product.category.name,
           createdBy: product.createdBy.name,
+          img: product.image,
         }));
         setAllProduct(filteredProducts);
       });
@@ -44,7 +45,7 @@ function CartContextProvider({ children }: CartContexProviderProps) {
     }
   };
   return (
-    <CartContext.Provider value={{ allProduct, addToCart ,userCart}}>
+    <CartContext.Provider value={{ allProduct, addToCart, userCart }}>
       {children}
     </CartContext.Provider>
   );

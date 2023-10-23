@@ -8,11 +8,8 @@ interface initiateInnerValueType {
 interface initiateValueType {
   [key: string]: initiateInnerValueType;
 
-  name: initiateInnerValueType;
   email: initiateInnerValueType;
-  number: initiateInnerValueType;
   password: initiateInnerValueType;
-  repetedPassword: initiateInnerValueType;
 }
 interface stateType {
   inputValue: initiateValueType;

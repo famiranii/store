@@ -1,4 +1,4 @@
-import ProductInCart from "./productInCart/productInCart";
+import ProductInCart from "./productInCart/ProductInCart";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 function Cart() {
@@ -12,7 +12,7 @@ function Cart() {
   }, [context.userCart]);
   return (
     <div className="bg-gray-100 min-h-screen">
-      <div className="container mx-auto p-6 w-1/2">
+      <div className="container mx-auto p-6 lg:w-2/3 xl:w-1/2">
         <h1 className="text-3xl font-semibold mb-12">Shopping Cart</h1>
         {!totalPrice && (
           <h2 className="text-2xl mb-5 bg-red-600 p-3 text-white font-semibold">

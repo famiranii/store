@@ -11,7 +11,7 @@ function ProductInCart(props: ProductType) {
       <div className="flex justify-between items-center border-b-2 border-gray-200 pb-4">
         <div className="flex items-center space-x-4">
           <img
-            src="product-image.jpg"
+            src={props.img}
             alt="Product"
             className="w-16 h-16 object-cover rounded"
           />

@@ -21,7 +21,7 @@ const validator = (value: string, validation: validationType[]): boolean => {
         return false;
       }
     } else if (validator.value === "EMAIL") {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
       return emailRegex.test(value);
     }
   }

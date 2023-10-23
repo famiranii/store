@@ -4,4 +4,5 @@ export type ProductType = {
   category: string;
   createdBy: string;
   cartCount: number;
+  img: string;
 };
